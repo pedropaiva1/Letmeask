@@ -11,6 +11,7 @@ import { database } from '../services/firebase'
 import { Question } from '../components/Question'
 import { useRoom } from '../hooks/useRoom'
 import deleteImg from '../assets/images/delete.svg'
+import { useAuth } from '../hooks/useAuth'
 
 type RoomParams = {
   id: string;
@@ -18,13 +19,19 @@ type RoomParams = {
 
 export function AdminRoom(){
 
-  const params = useParams<RoomParams>()
+  const { user } = useAuth()
 
-  const history = useHistory()
+  const params = useParams<RoomParams>()
 
   const roomId = params.id
 
-  const { title, questions } = useRoom(roomId)  
+  const history = useHistory()
+
+  const { title, questions, authorId } = useRoom(roomId)  
+
+  if(user?.id !== authorId){
+    
+  }
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -52,8 +59,6 @@ export function AdminRoom(){
     })
   }
 
-  console.log(questions)
-
   return (
     <div id="page-room">
       <header>
@@ -65,7 +70,7 @@ export function AdminRoom(){
           </div>
         </div>
       </header>
-      <main className="content">
+      {user?.id === authorId ? <main className="content">
         <div className="room-title">
           <h1>Sala {title}</h1>
           { questions.length > 0 && <span>{questions.length} pergunta(s)</span> }
@@ -115,7 +120,8 @@ export function AdminRoom(){
           })}
         </div>
         
-      </main>
+      </main> : <h1>não, burro</h1>}
+      
     </div>
   )
 }

@@ -13,3 +13,12 @@ body {
 body, input, button, textarea {
   font: 400 16px 'Roboto', sans-serif;
 }
+
+@keyframes loadAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity:1
+  } 
+}

@@ -4,7 +4,7 @@ import { RoomCode } from '../components/RoomCode'
 import { useParams } from 'react-router-dom'
 
 import '../styles/room.scss'
-import { FormEvent, useState, useEffect } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { database } from '../services/firebase'
 import { Question } from '../components/Question'
@@ -18,6 +18,7 @@ export function Room(){
 
   const { user } = useAuth()
   const params = useParams<RoomParams>()
+
 
   const [newQuestion, setNewQuestion] = useState('')
 
@@ -66,7 +67,7 @@ export function Room(){
   }
 
   return (
-    <div id="page-room">
+      <div id="page-room">
       <header>
         <div className="content">
           <img src={logoImg} alt="" />
@@ -129,5 +130,6 @@ export function Room(){
         
       </main>
     </div>
+    
   )
 }
