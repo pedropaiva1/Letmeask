@@ -34,7 +34,8 @@ export function Home() {
       return
     }
 
-    if(roomCode.trim().startsWith('/')){
+    if(!roomCode.trim().startsWith('-')){
+      alert('Bad prefix code of this room.')
       return
     }
 
