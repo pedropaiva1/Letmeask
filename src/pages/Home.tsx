@@ -34,6 +34,10 @@ export function Home() {
       return
     }
 
+    if(roomCode.trim().startsWith('/')){
+      return
+    }
+
     const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
     if (!roomRef.exists()){
