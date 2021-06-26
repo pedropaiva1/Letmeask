@@ -34,11 +34,6 @@ export function Home() {
       return
     }
 
-    if(!roomCode.trim().startsWith('-')){
-      alert('Bad prefix code of this room.')
-      return
-    }
-
     const roomRef = await database.ref(`rooms/${roomCode}`).get()
 
     if (!roomRef.exists()){
